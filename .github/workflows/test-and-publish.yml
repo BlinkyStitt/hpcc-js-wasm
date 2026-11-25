@@ -40,13 +40,14 @@ jobs:
         run: |
           npm run build
 
-      - name: Test
+      - name: Test bundles and browser
         env:
           CI: true
-        run: |
-            npm run test
+        run: npm run test-bundles-and-browser
 
-      - name: Calculate Coverage
+      - name: Run Node tests with coverage
+        env:
+          CI: true
         run: |
           npm run coverage
           npm run coverage-report
