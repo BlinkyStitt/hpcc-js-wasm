@@ -75,3 +75,8 @@ jobs:
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           prerelease: ${{ contains(github.ref, '-next.') }}
+
+# Superseded PR validation must not hold runner capacity.
+concurrency:
+  group: pr-ci-test-and-publish.yml-${{ github.event_name }}-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: true
