@@ -46,3 +46,8 @@ jobs:
         uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: ${{ steps.ossar.outputs.sarifFile }}
+
+# Superseded PR validation must not hold runner capacity.
+concurrency:
+  group: pr-ci-ossar-analysis.yml-${{ github.event_name }}-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: true
